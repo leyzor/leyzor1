@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil de Euphon</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000; color: white; overflow: hidden;
+        }
+
+        /* Écran d'entrée */
+        #enter-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; display: flex; justify-content: center;
+            align-items: center; z-index: 1000; cursor: pointer;
+            font-size: 1.2rem; letter-spacing: 2px;
+        }
+
+        /* Vidéo de fond */
+        .bg-video {
+            position: fixed; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 0; filter: brightness(0.3);
+            object-fit: cover;
+        }
+
+        /* Contenu Principal */
+        #main-content {
+            position: relative; z-index: 10;
+            height: 100%; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 1.5s ease;
+        }
+
+        /* Widget Discord */
+        .discord-widget {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        .discord-widget img {
+            display: block;
+            max-width: 350px; /* Taille idéale pour mobile */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="enter-screen">CLIQUEZ POUR ENTRER</div>
+
+    <video id="bg-video" class="bg-video" loop playsinline>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+    <audio id="bg-music" loop>
+        <source src="musique.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="main-content">
+        <div class="discord-widget">
+            <img src="https://lanyard.cnrad.dev/api/172383880677031938?theme=dark&bg=00000000&animated=true" alt="Discord Status">
+        </div>
+    </div>
+
+    <script>
+        const enter = document.getElementById('enter-screen');
+        const video = document.getElementById('bg-video');
+        const music = document.getElementById('bg-music');
+        const content = document.getElementById('main-content');
+
+        enter.addEventListener('click', () => {
+            video.play();
+            music.play();
+            enter.style.opacity = '0';
+            setTimeout(() => {
+                enter.style.display = 'none';
+                content.style.opacity = '1';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
